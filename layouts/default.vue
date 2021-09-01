@@ -1,23 +1,27 @@
 <template>
   <v-app>
-    <v-app-bar app class="px-10">
+    <v-app-bar app class='px-10'>
       <v-toolbar-title>
-        <nuxt-link to='/' style='text-decoration: none'>
-          <v-btn :color="$vuetify.theme.dark? 'white':'black'" :dark='!$vuetify.theme.dark' :class="$vuetify.theme.dark ? 'black--text': 'white--text'" large >DEV</v-btn>
+        <nuxt-link style='text-decoration: none' to='/'>
+          <v-btn :class="$vuetify.theme.dark ? 'black--text': 'white--text'"
+                 :color="$vuetify.theme.dark? 'white':'black'"
+                 :dark='!$vuetify.theme.dark' large>
+            DEV CRUNCH
+          </v-btn>
         </nuxt-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn
+        :color="($vuetify.theme.dark) ? 'white' : 'black'"
         fab
         small
-        :color="($vuetify.theme.dark) ? 'white' : 'black'"
-        @click="changeTheme"
+        @click='changeTheme'
       >
         <v-icon :color="($vuetify.theme.dark) ? 'black' : 'white'">
           {{ ($vuetify.theme.dark) ? 'mdi-weather-night' : 'mdi-weather-sunny' }}
         </v-icon>
       </v-btn>
-      <v-btn v-if="$route.path!=='/login'" to='/login' outlined  class='mx-2'>
+      <v-btn v-if="$route.path!=='/login'" class='mx-2' outlined to='/login'>
         Sign In
       </v-btn>
     </v-app-bar>
@@ -43,12 +47,16 @@ export default {
   methods: {
     changeTheme() {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark
-      localStorage.setItem('darkMode',this.$vuetify.theme.dark ? 'true' : 'false')
+      localStorage.setItem('darkMode', this.$vuetify.theme.dark ? 'true' : 'false')
     }
   }
 }
 </script>
 
 <style>
-.my-toolbar { width: 80%; left:  10%; margin: auto}
+.my-toolbar {
+  width: 80%;
+  left: 10%;
+  margin: auto
+}
 </style>
