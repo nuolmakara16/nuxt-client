@@ -81,7 +81,7 @@ export default {
   },
   env: {
     // API Credential
-    API_BASE_URL: process.env.API_BASE_URL,
+    API_URL: process.env.API_URL,
     PASSPORT_CLIENT_SECRET: process.env.PASSPORT_CLIENT_SECRET,
     PASSPORT_CLIENT_ID: process.env.PASSPORT_CLIENT_ID,
     PASSPORT_GRANT_TYPE: process.env.PASSPORT_GRANT_TYPE,
@@ -92,20 +92,22 @@ export default {
   },
   axios: {
     proxy: true,
-    baseURL: process.env.API_BASE_URL,
+    baseURL: process.env.API_URL,
   },
   proxy: {
     '/backend': {
-      target: process.env.API_BASE_URL,
+      target: process.env.API_URL,
       pathRewrite: { '^/backend': '/' }
     }
   },
   auth: {
-    redirect: {
-      login: '/login',
-      logout: '/',
-      callback: '/login',
-      home: '/'
+    auth: {
+      redirect: {
+        login: '/login',
+        logout: '/',
+        home: '/dashboard',
+        callback: '/login'
+      }
     },
     strategies: {
       google: {
@@ -120,7 +122,7 @@ export default {
         responseType: 'token id_token',
         clientId:  process.env.AUTH_GOOGLE_CLIENT_ID,
         clientSecret: process.env.AUTH_GOOGLE_CLIENT_SECRET,
-        redirectUri: process.env.AUTH_GOOGLE_REDIRECT_URI,
+        redirectUri: 'http://127.0.0.1:3000',
       },
       laravelPassportPasswordGrant: {
         name: 'laravelPassportPassword',
@@ -141,14 +143,15 @@ export default {
         },
         clientId: process.env.PASSPORT_CLIENT_ID,
         clientSecret: process.env.PASSPORT_CLIENT_SECRET,
-        grantType: process.env.PASSPORT_GRANT_TYPE,
+        grantType: 'password',
+        rewriteRedirects: '/dashboard'
       },
     },
   },
   serverMiddleware: ['~/server-middleware/logger'],
-  server: {
-    port: 8000, // default: 3000
-    host: '0.0.0.0', // default: localhost,
-    timing: false
-  }
+  // server: {
+  //   port: 8000, // default: 3000
+  //   host: '0.0.0.0', // default: localhost,
+  //   timing: false
+  // }
 }

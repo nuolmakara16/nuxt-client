@@ -28,7 +28,6 @@
               <v-alert v-if='errorMsg' type='error' outlined>{{ errorMsg }}</v-alert>
               <v-text-field
                 v-model="username"
-                autofocus
                 outlined
                 name="email"
                 type="email"
@@ -120,8 +119,11 @@ export default {
       }
       await this.$auth
         .loginWith('laravelPassportPassword', { data: form }).then((res) => {
+          this.loading = false
           this.errorMsg = ''
-          this.$router.push('/dashboard')
+          if (res.status === 200) {
+            this.$router.push('/dashboard')
+          }
         }).catch(() => {
           this.loading = false
           this.errorMsg = 'Invalid email or password'

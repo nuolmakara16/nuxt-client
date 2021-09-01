@@ -1,11 +1,6 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols='12'>
-        <v-btn color='primary' @click='refresh'>
-          <v-icon>mdi-refresh</v-icon>
-        </v-btn>
-      </v-col>
       <v-col>
         <v-data-table
           :headers="headers"
@@ -47,16 +42,9 @@ export default {
   },
   mounted() {
     this.methodGetAllUsers()
-    this.$nextTick(() => {
-      this.$nuxt.$loading.start()
-      setTimeout(() => this.$nuxt.$loading.finish(), 5000)
-    })
   },
   methods: {
     ...mapActions({ actionGetAllUsers: 'actionGetAllUsers'}),
-    refresh() {
-      this.$nuxt.refresh()
-    },
     async methodGetAllUsers(){
       this.loading = true
       const token = this.$auth.strategy.token.get()

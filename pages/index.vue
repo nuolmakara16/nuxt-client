@@ -2,16 +2,24 @@
   <v-app>
     <v-container>
       <v-row>
-        <v-col v-for='(user, i) in users' :key='i' cols='12' md='4' lg='3'>
-          <v-card class='px-4 py-4' outlined>
-            <v-card-title>{{ user.name }}</v-card-title>
-            <div class='d-flex'>
-              <v-spacer></v-spacer>
-              <v-btn color='primary' target='_blank' @click='contact(user)'>
-                <v-icon class='mr-2'>mdi-telegram</v-icon>
-                contact
-              </v-btn>
-            </div>
+        <v-col cols='3'>
+          <v-card>
+            <v-card-title>Hello</v-card-title>
+          </v-card>
+        </v-col>
+        <v-col cols='6'>
+          <div v-for="(post, index) in posts" :key="index" class='flex-column'>
+            <v-hover v-slot="{ hover }">
+              <v-card class='mb-4' outlined :elevation="hover ? 4 : 0" :class="{ 'on-hover': hover }">
+                <v-card-title> {{ post.title }}</v-card-title>
+                <v-card-text>{{ post.body }}</v-card-text>
+              </v-card>
+            </v-hover>
+          </div>
+        </v-col>
+        <v-col cols='3'>
+          <v-card>
+            <v-card-title>Hello</v-card-title>
           </v-card>
         </v-col>
       </v-row>
@@ -24,16 +32,15 @@ export default {
   data() {
     return {
       posts: [],
-      users: [
-        { id: 1, name: 'Odom', telegram: 'https://t.me/Pen_Serey_Otdom' },
-        { id: 2, name: 'Sothea', telegram: 'https://t.me/sotheaOppa' },
-        { id: 3, name: 'Makara', telegram: 'https://t.me/makaranuol' },
-      ]
     }
   },
+  mounted() {
+    this.fetch()
+  },
   methods: {
-    contact(user) {
-      window.open( user.telegram, "_blank");
+    async fetch() {
+      const res = await this.$axios.get('https://gorest.co.in/public/v1/posts')
+      this.posts = res.data.data
     }
   }
 }
