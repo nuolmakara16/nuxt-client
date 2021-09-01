@@ -94,7 +94,7 @@ function interceptError(error) {
 }
 
 function getAllUsers({ token }) {
-  const path = '/clients'
+  const path = '/clients?limit=0'
   const http = CreateHTTP(token)
   return http.get(path)
 }

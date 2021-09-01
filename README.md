@@ -24,5 +24,47 @@ $ npm run start
 # generate static project
 $ npm run generate
 ```
+## Setup With Docker
+```bash
+# Clone the project
+$ git clone https://github.com/nuolmakara16/nuxt-client.git
 
+# Go to cloned folder
+$ cd nuxt-client
+
+# List all containers
+$ sudo docker ps -a
+
+# List all images
+$ sudo docker images -a
+
+# Remove all unused images
+$ sudo docker image prune -a
+
+# Delete all stopped container
+$ sudo docker system prune
+
+# Stop a running container
+$ sudo docker stop [container_name]
+
+# Start a container
+$ sudo docker start [container_name]
+
+# Build docker image.FYI: -t is for tag
+$ sudo docker build -t [image-name]:[tag-name] .
+$ sudo docker build -t nuxt-client:v0.0.1-production .
+
+# Build docker image by without specifying tag
+$ sudo docker build -t [image-name].
+$ sudo docker build -t nuxt-client .
+
+# Run docker container in detach mode and bind docker port 3000 to host 80
+$ sudo docker run -d -p 80:3000 [image-name]:[tag-name]
+$ sudo docker run -d -p 80:3000 nuxt-client:v0.0.1-production
+
+# Run docker container in detach mode and bind docker port 3000 to host 80 without tag-name
+$ sudo docker run -d -p 80:3000 [image-name]
+$ sudo docker run -d -p 80:3000 nuxt-client
+
+```
 
