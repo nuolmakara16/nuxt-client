@@ -7,7 +7,8 @@
 <img src='https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white' alt=''>
 </div>
 
-### This project is just for fun please use at your own risk
+### This project is just for fun feel free to download and use at your own need
+
 ## Build Setup
 Change the environment variable base one your backend
 ```bash
@@ -62,9 +63,15 @@ $ sudo docker build -t nuxt-client .
 $ sudo docker run -d -p 80:3000 [image-name]:[tag-name]
 $ sudo docker run -d -p 80:3000 nuxt-client:v0.0.1-production
 
-# Run docker container in detach mode and bind docker port 3000 to host 80 without tag-name
+# Run docker container in detach mode and bind docker port 3000 to host port 80 without using tag-name
 $ sudo docker run -d -p 80:3000 [image-name]
 $ sudo docker run -d -p 80:3000 nuxt-client
 
 ```
 
+### Reference
+- [How to Push and Pull a Docker Image from Docker Hub](https://www.youtube.com/watch?v=EIHY_CY5J0k)
+
+- [Learn more about docker](https://docs.docker.com)
+
+- [nuxt/auth](https://auth.nuxtjs.org/)
