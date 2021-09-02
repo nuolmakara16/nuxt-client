@@ -1,17 +1,30 @@
 <template>
   <v-app>
-    <v-app-bar app class='px-10' elevate-on-scroll>
-      <v-toolbar-title>
+    <v-app-bar app :class="$vuetify.breakpoint.smAndUp? 'px-10':'pb-1'"  elevate-on-scroll>
+      <v-btn
+        v-if='$vuetify.breakpoint.smAndDown'
+        :class="$vuetify.theme.dark ? 'black--text': 'white--text'"
+        :color="$vuetify.theme.dark? 'white':'black'"
+        :dark='!$vuetify.theme.dark'
+        block
+        x-large
+      >
+        DEV CRUNCH
+      </v-btn>
+      <v-toolbar-title v-if='$vuetify.breakpoint.smAndUp'>
         <nuxt-link style='text-decoration: none' to='/'>
-          <v-btn :class="$vuetify.theme.dark ? 'black--text': 'white--text'"
-                 :color="$vuetify.theme.dark? 'white':'black'"
-                 :dark='!$vuetify.theme.dark' large>
+          <v-btn
+            :class="$vuetify.theme.dark ? 'black--text': 'white--text'"
+            :color="$vuetify.theme.dark? 'white':'black'"
+            :dark='!$vuetify.theme.dark'
+            large
+          >
             DEV CRUNCH
           </v-btn>
         </nuxt-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <div v-if="$route.path!=='/login'">
+      <div v-if="$route.path!=='/login' && $vuetify.breakpoint.mdAndUp">
         <v-menu v-for='(category, i) in categories' :key='i' min-width='200' offset-y open-on-hover slide-y-transition
                 tile transition='fade-transition'>
           <template #activator='{ on, attrs }'>
@@ -36,25 +49,63 @@
         </v-menu>
       </div>
       <v-spacer></v-spacer>
-      <v-btn
-        :color="($vuetify.theme.dark) ? 'white' : 'black'"
-        fab
-        small
-        @click='changeTheme'
-      >
-        <v-icon :color="($vuetify.theme.dark) ? 'black' : 'white'">
-          {{ ($vuetify.theme.dark) ? 'mdi-weather-night' : 'mdi-weather-sunny' }}
-        </v-icon>
-      </v-btn>
-      <v-btn v-if="$route.path!=='/login'" class='mx-2' outlined to='/login'>
+      <v-btn v-if="$route.path!=='/login' && $vuetify.breakpoint.mdAndUp" class='mx-2' outlined to='/login'>
         Sign In
+      </v-btn>
+      <v-btn v-if='$vuetify.breakpoint.mdAndUp' text fab small @click.stop="rightDrawer = !rightDrawer">
+        <v-icon>mdi-tune-variant</v-icon>
       </v-btn>
     </v-app-bar>
     <v-main>
       <v-container>
         <Nuxt />
+        <v-btn
+          v-show="fab"
+          v-scroll="onScroll"
+          fab
+          fixed
+          bottom
+          right
+          :dark='$vuetify.theme.dark'
+          :color="$vuetify.theme.dark ? 'white' : 'black'"
+          @click="toTop"
+        >
+          <v-icon :color="$vuetify.theme.dark ? 'black' : 'white'">mdi-rocket</v-icon>
+        </v-btn>
       </v-container>
     </v-main>
+    <v-navigation-drawer
+      v-model="rightDrawer"
+      :right="right"
+      temporary
+      fixed
+    >
+      <v-list-item>
+        <v-list-item-content>
+          <v-list-item-title>
+            <strong>Settings</strong>
+          </v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+      <v-divider></v-divider>
+      <v-list>
+        <v-list-item>
+          <v-btn
+            v-if='$vuetify.breakpoint.mdAndUp'
+            :color="($vuetify.theme.dark) ? 'white' : 'black'"
+            fab
+            small
+            class='mr-2'
+            @click='changeTheme'
+          >
+            <v-icon :color="($vuetify.theme.dark) ? 'black' : 'white'">
+              {{ ($vuetify.theme.dark) ? 'mdi-weather-night' : 'mdi-weather-sunny' }}
+            </v-icon>
+          </v-btn>
+          <strong>Dark Mode</strong>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
   </v-app>
 </template>
 
@@ -62,6 +113,14 @@
 export default {
   data() {
     return {
+      right: true,
+      rightDrawer: false,
+      fab: false,
+      drawer: null,
+      items: [
+        { title: 'Home', icon: 'mdi-view-dashboard' },
+        { title: 'About', icon: 'mdi-forum' },
+      ],
       darkMode: localStorage.getItem('darkMode'),
       categories: [
         {
@@ -110,6 +169,14 @@ export default {
     logout() {
       this.$auth.logout()
       this.$router.push('/')
+    },
+    onScroll (e) {
+      if (typeof window === 'undefined') return
+      const top = window.pageYOffset ||   e.target.scrollTop || 0
+      this.fab = top > 20
+    },
+    toTop () {
+      this.$vuetify.goTo(0)
     }
   }
 }
@@ -119,7 +186,7 @@ export default {
 #arrow {
   position: relative;
   left: 0;
-  transition: left ease 0.5s;
+  transition: left ease 0.25s;
 }
 
 #arrow:hover {
