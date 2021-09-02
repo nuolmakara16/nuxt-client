@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols='10'>
+      <v-col cols='12' md='10' lg='10'>
         <v-card class='px-10 py-10'>
           <v-img src="https://picsum.photos/500/500" max-height='400'></v-img>
           <br>

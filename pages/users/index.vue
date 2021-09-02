@@ -33,6 +33,7 @@ export default {
         { text: 'Created At', value: 'created_at', sortable: true },
         { text: 'ID', value: 'id', sortable: false },
         { text: 'Email', value: 'email', sortable: false },
+        { text: 'Register Via', value: 'social_provider', sortable: false },
         { text: 'Gender', value: 'gender', sortable: false },
       ]
     }

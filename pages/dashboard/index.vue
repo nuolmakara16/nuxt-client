@@ -1,20 +1,20 @@
 <template>
   <v-container>
     <v-row>
-      <v-col v-for='(user, i) in 24' :key='i' cols='3'>
+      <v-col v-for='(user, i) in 24' :key='i' cols='12' md='4' lg='3'>
         <v-card>
           <v-img :src="`https://picsum.photos/500/500?random=${i}`"></v-img>
         </v-card>
-<!--        <v-card class='px-4 py-4' outlined>-->
-<!--          <v-card-title>{{ user.name }}</v-card-title>-->
-<!--          <div class='d-flex'>-->
-<!--            <v-spacer></v-spacer>-->
-<!--            <v-btn color='primary' :href='user.telegram' target='_blank' @click='contact(user)'>-->
-<!--              <v-icon class='mr-2'>mdi-telegram</v-icon>-->
-<!--              contact-->
-<!--            </v-btn>-->
-<!--          </div>-->
-<!--        </v-card>-->
+        <!--        <v-card class='px-4 py-4' outlined>-->
+        <!--          <v-card-title>{{ user.name }}</v-card-title>-->
+        <!--          <div class='d-flex'>-->
+        <!--            <v-spacer></v-spacer>-->
+        <!--            <v-btn color='primary' :href='user.telegram' target='_blank' @click='contact(user)'>-->
+        <!--              <v-icon class='mr-2'>mdi-telegram</v-icon>-->
+        <!--              contact-->
+        <!--            </v-btn>-->
+        <!--          </div>-->
+        <!--        </v-card>-->
       </v-col>
     </v-row>
   </v-container>

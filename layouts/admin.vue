@@ -1,20 +1,20 @@
 <template>
-  <v-app id="inspire">
+  <v-app id='inspire'>
     <v-navigation-drawer
-      v-model="drawer"
+      v-model='drawer'
       app
     >
-      <v-list-item class="px-2 my-1">
+      <v-list-item class='px-2 my-1'>
         <v-list-item-avatar></v-list-item-avatar>
         <v-list-item-title>
-          <strong>Auth Management</strong>
+          <strong>DEV CRUNCH</strong>
         </v-list-item-title>
       </v-list-item>
       <v-divider></v-divider>
       <v-list>
         <!--Dashboard-->
         <v-list-item-group mandator>
-          <v-list-item to="/dashboard">
+          <v-list-item to='/dashboard'>
             <v-list-item-icon>
               <v-icon>mdi-view-dashboard</v-icon>
             </v-list-item-icon>
@@ -24,7 +24,7 @@
         <!--/Dashboard-->
         <!--Dashboard-->
         <v-list-item-group mandator>
-          <v-list-item to="/users">
+          <v-list-item to='/users'>
             <v-list-item-icon>
               <v-icon>mdi-account-multiple</v-icon>
             </v-list-item-icon>
@@ -36,33 +36,33 @@
     </v-navigation-drawer>
 
     <v-app-bar app>
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click='drawer = !drawer'></v-app-bar-nav-icon>
       <v-toolbar-title>Application</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn
-        fab
-        small
         :color="($vuetify.theme.dark) ? 'white' : 'black'"
         class='mx-2'
-        @click="changeTheme"
+        fab
+        small
+        @click='changeTheme'
       >
         <v-icon :color="($vuetify.theme.dark) ? 'black' : 'white'">
           {{ ($vuetify.theme.dark) ? 'mdi-weather-night' : 'mdi-weather-sunny' }}
         </v-icon>
       </v-btn>
       <v-menu offset-y>
-        <template #activator="{ on, attrs }">
-          <v-btn v-if='$auth.user.data.name' outlined class="admin" v-bind="attrs" v-on="on">
+        <template #activator='{ on, attrs }'>
+          <v-btn v-if='$auth.user.data.name' v-bind='attrs' class='admin' outlined v-on='on'>
             {{ $auth.user.data.name }}
             <v-icon>mdi-menu-down</v-icon>
           </v-btn>
-          <v-btn v-else outlined class="admin" v-bind="attrs" v-on="on">
+          <v-btn v-else v-bind='attrs' class='admin' outlined v-on='on'>
             Administrator
             <v-icon>mdi-menu-down</v-icon>
           </v-btn>
         </template>
         <v-list>
-          <v-list-item @click="logout">
+          <v-list-item @click='logout'>
             <v-icon>mdi-logout</v-icon>
             <v-list-item-title>Logout</v-list-item-title>
           </v-list-item>
@@ -80,7 +80,7 @@
 
 <script>
 export default {
-  middleware: 'auth',
+  middleware: ['auth', 'is-admin'],
   data: () => ({ drawer: true, darkMode: localStorage.getItem('darkMode') }),
   mounted() {
     this.darkMode = localStorage.getItem('darkMode')
@@ -93,7 +93,7 @@ export default {
     },
     changeTheme() {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark
-      localStorage.setItem('darkMode',this.$vuetify.theme.dark ? 'true' : 'false')
+      localStorage.setItem('darkMode', this.$vuetify.theme.dark ? 'true' : 'false')
     }
   }
 }
