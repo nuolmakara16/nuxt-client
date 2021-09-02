@@ -12,20 +12,6 @@ const createStore = () => {
     mutations: {},
     getters: {},
     actions: {},
-    // actions: {
-    //   async nuxtServerInit(store) {
-    //     const token = this.$cookies.get('auth._token.laravelPassportPassword')
-    //     if (token ) {
-    //       try {
-    //         await store.commit('SET_TOKEN', token)
-    //       } catch (e) {
-    //         await store.commit('LOGOUT')
-    //       }
-    //     } else {
-    //       await store.commit('LOGOUT')
-    //     }
-    //   },
-    // },
   })
 }
 

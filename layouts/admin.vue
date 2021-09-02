@@ -39,17 +39,6 @@
       <v-app-bar-nav-icon @click='drawer = !drawer'></v-app-bar-nav-icon>
       <v-toolbar-title>Application</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn
-        :color="($vuetify.theme.dark) ? 'white' : 'black'"
-        class='mx-2'
-        fab
-        small
-        @click='changeTheme'
-      >
-        <v-icon :color="($vuetify.theme.dark) ? 'black' : 'white'">
-          {{ ($vuetify.theme.dark) ? 'mdi-weather-night' : 'mdi-weather-sunny' }}
-        </v-icon>
-      </v-btn>
       <v-menu offset-y>
         <template #activator='{ on, attrs }'>
           <v-btn v-if='$auth.user.data.name' v-bind='attrs' class='admin' outlined v-on='on'>
@@ -68,6 +57,9 @@
           </v-list-item>
         </v-list>
       </v-menu>
+      <v-btn v-if='$vuetify.breakpoint.mdAndUp' text fab small class='mx-2' @click.stop="rightDrawer = !rightDrawer">
+        <v-icon>mdi-tune-variant</v-icon>
+      </v-btn>
     </v-app-bar>
 
     <v-main>
@@ -75,13 +67,52 @@
         <Nuxt />
       </v-container>
     </v-main>
+    <v-navigation-drawer
+      v-model="rightDrawer"
+      :right="right"
+      temporary
+      fixed
+    >
+      <v-list-item>
+        <v-list-item-content>
+          <v-list-item-title>
+            <strong>Settings</strong>
+          </v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+      <v-divider></v-divider>
+      <v-list>
+        <v-list-item>
+          <v-btn
+            v-if='$vuetify.breakpoint.mdAndUp'
+            :color="($vuetify.theme.dark) ? 'white' : 'black'"
+            fab
+            small
+            class='mr-2'
+            @click='changeTheme'
+          >
+            <v-icon :color="($vuetify.theme.dark) ? 'black' : 'white'">
+              {{ ($vuetify.theme.dark) ? 'mdi-weather-night' : 'mdi-weather-sunny' }}
+            </v-icon>
+          </v-btn>
+          <strong>Dark Mode</strong>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
   </v-app>
 </template>
 
 <script>
 export default {
   middleware: ['auth', 'is-admin'],
-  data: () => ({ drawer: true, darkMode: localStorage.getItem('darkMode') }),
+  data() {
+    return {
+      drawer: true,
+      darkMode: localStorage.getItem('darkMode'),
+      right: true,
+      rightDrawer: false,
+    }
+  },
   mounted() {
     this.darkMode = localStorage.getItem('darkMode')
     this.$vuetify.theme.dark = this.darkMode === 'true'

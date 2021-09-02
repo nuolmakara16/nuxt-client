@@ -99,7 +99,14 @@ function getAllUsers({ token }) {
   return http.get(path)
 }
 
+function getAllArticles({ token }) {
+  const path = '/articles'
+  const http = CreateHTTP(token)
+  return http.get(path)
+}
+
 export default {
-  getAllUsers
+  getAllUsers,
+  getAllArticles,
 }
 
