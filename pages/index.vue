@@ -30,6 +30,9 @@
           </v-hover>
         </v-col>
       </v-row>
+      <v-row v-if="posts.length > 0" justify='center' align='center' class='my-10'>
+        <v-btn outlined>Load More</v-btn>
+      </v-row>
     </v-container>
   </v-app>
 </template>
@@ -39,12 +42,20 @@ export default {
   data() {
     return {
       posts: [],
+      access_token: '',
     }
   },
   mounted() {
     this.fetch()
+    this.getGoogleAccessToken()
   },
   methods: {
+    getGoogleAccessToken() {
+      if (this.$route.hash) {
+        this.access_token = this.$route.hash.substr(1).split('&')[1].replace('access_token=', '')
+        console.log(this.access_token)
+      }
+    },
     async fetch() {
       const res = await this.$axios.get('https://gorest.co.in/public/v1/posts')
       this.posts = res.data.data

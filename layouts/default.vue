@@ -48,7 +48,11 @@ export default {
     changeTheme() {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark
       localStorage.setItem('darkMode', this.$vuetify.theme.dark ? 'true' : 'false')
-    }
+    },
+    logout() {
+      this.$auth.logout()
+      this.$router.push('/')
+    },
   }
 }
 </script>

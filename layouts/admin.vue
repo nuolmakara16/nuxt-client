@@ -7,7 +7,7 @@
       <v-list-item class="px-2 my-1">
         <v-list-item-avatar></v-list-item-avatar>
         <v-list-item-title>
-          <strong>Auth Management</strong>
+          <strong>DEV CRUNCH</strong>
         </v-list-item-title>
       </v-list-item>
       <v-divider></v-divider>
@@ -80,7 +80,7 @@
 
 <script>
 export default {
-  middleware: 'auth',
+  middleware: ['auth', 'is-admin'],
   data: () => ({ drawer: true, darkMode: localStorage.getItem('darkMode') }),
   mounted() {
     this.darkMode = localStorage.getItem('darkMode')

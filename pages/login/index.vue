@@ -18,7 +18,7 @@
               <v-icon class='mx-2'>mdi-google</v-icon>
               Continue With Google
             </v-btn>
-            <v-btn block color='#24292e' class='py-6 mb-2' dark>
+            <v-btn block color='#24292e' class='py-6 mb-2' dark @click='loginWithGithub'>
               <v-icon class='mx-2'>mdi-github</v-icon>
               Continue With Github
             </v-btn>
@@ -132,6 +132,9 @@ export default {
     },
     async loginWithGoogle(){
       await this.$auth.loginWith('google')
+    },
+    loginWithGithub() {
+      alert('Function Still in development')
     }
   }
 }
