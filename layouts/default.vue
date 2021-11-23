@@ -52,6 +52,7 @@
       <v-btn v-if="$route.path!=='/login' && $vuetify.breakpoint.mdAndUp" class='mx-2' outlined to='/login'>
         Sign In
       </v-btn>
+      <v-btn outlined to='/dispatcher'>Dispatcher</v-btn>
       <v-btn v-if='$vuetify.breakpoint.mdAndUp' text fab small @click.stop="rightDrawer = !rightDrawer">
         <v-icon>mdi-tune-variant</v-icon>
       </v-btn>

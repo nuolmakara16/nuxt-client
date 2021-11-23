@@ -9,13 +9,13 @@
               :key="index"
               cols='12'
               md='4'
-              lg='4'
+              lg='3'
               style='cursor: pointer'
               @click='readMore(post.id)'
             >
               <v-hover v-slot="{ hover }">
                 <v-card
-                  class='mb-4 px-2 py-2'
+                  class='mb-4 px-2 py-2 rounded-xl'
                   :elevation="hover ? 10 : 0"
                   :class="$vuetify.theme.dark && hover ? 'white-border' : ''"
                   :color="$vuetify.theme.dark ? '': 'transparent'"

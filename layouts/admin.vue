@@ -104,7 +104,7 @@
 
 <script>
 export default {
-  middleware: ['auth', 'is-admin'],
+  // middleware: ['auth', 'is-admin'],
   data() {
     return {
       drawer: true,
