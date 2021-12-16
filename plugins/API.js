@@ -93,20 +93,13 @@ function interceptError(error) {
   }
 }
 
-function getAllUsers({ token }) {
-  const path = '/clients?limit=0'
-  const http = CreateHTTP(token)
-  return http.get(path)
-}
-
-function getAllArticles({ token }) {
-  const path = '/articles'
-  const http = CreateHTTP(token)
+function getHotels() {
+  const path = '/hotels'
+  const http = CreateHTTP
   return http.get(path)
 }
 
 export default {
-  getAllUsers,
-  getAllArticles,
+  getHotels
 }
 

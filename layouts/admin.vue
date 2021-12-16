@@ -41,11 +41,7 @@
       <v-spacer></v-spacer>
       <v-menu offset-y>
         <template #activator='{ on, attrs }'>
-          <v-btn v-if='$auth.user.data.name' v-bind='attrs' class='admin' outlined v-on='on'>
-            {{ $auth.user.data.name }}
-            <v-icon>mdi-menu-down</v-icon>
-          </v-btn>
-          <v-btn v-else v-bind='attrs' class='admin' outlined v-on='on'>
+          <v-btn v-bind='attrs' class='admin' outlined v-on='on'>
             Administrator
             <v-icon>mdi-menu-down</v-icon>
           </v-btn>
