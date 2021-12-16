@@ -112,23 +112,8 @@ export default {
         this.login()
       }
     },
-    async login() {
-      const form = {
-        username: this.username,
-        password: this.password
-      }
-      await this.$auth
-        .loginWith('laravelPassportPassword', { data: form }).then((res) => {
-          this.loading = false
-          this.errorMsg = ''
-          if (res.status === 200) {
-            this.$router.push('/dashboard')
-          }
-        }).catch(() => {
-          this.loading = false
-          this.errorMsg = 'Invalid email or password'
-          this.$refs.signinform.reset()
-        })
+    login() {
+      this.$router.push('/dashboard')
     },
     async loginWithGoogle(){
       await this.$auth.loginWith('google')

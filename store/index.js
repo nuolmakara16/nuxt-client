@@ -1,12 +1,10 @@
 import Vuex from 'vuex'
-import authStore from './modules/auth'
-import userStore from './modules/admin/user'
+import hotelStore from './modules/hotel'
 const createStore = () => {
   return new Vuex.Store({
     namespaced: true,
     modules: {
-      auth: authStore,
-      users: userStore,
+      hotels: hotelStore,
     },
     state: {},
     mutations: {},

@@ -58,15 +58,8 @@ export default {
   },
   mounted() {
     this.fetch()
-    this.getGoogleAccessToken()
   },
   methods: {
-    getGoogleAccessToken() {
-      if (this.$route.hash) {
-        this.access_token = this.$route.hash.substr(1).split('&')[1].replace('access_token=', '')
-        console.log(this.access_token)
-      }
-    },
     async fetch() {
       const res = await this.$axios.get('https://gorest.co.in/public/v1/posts')
       this.posts = res.data.data
